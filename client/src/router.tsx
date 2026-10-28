@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router';
 import { Companies } from '@pages/Companies.page';
 import { Dashboard } from '@pages/Dashboard.page';
 import { Records } from '@pages/Records.page';
+import { People } from '@pages/People.page';
 
 import { MainLayout } from './MainLayout';
 
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
             {
                 path: '/records',
                 element: <Records />,
+            },
+
+            {
+                path: '/people',
+                element: <People />,
             },
         ],
     },
