@@ -46,7 +46,7 @@ Por padrão, os candidatos recebem o projeto como um arquivo compactado.
     composer run phinx:seed
     ```
 
-**A API estará disponível em http://localhost:8080 e o front-end em https://localhost:5100 ⚡️**
+**A API estará disponível em http://localhost:8080 e o front-end em http://localhost:5100 ⚡️**
 
 #### Como derrubar os containers?
 
