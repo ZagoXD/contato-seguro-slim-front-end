@@ -46,7 +46,16 @@ Por padrão, os candidatos recebem o projeto como um arquivo compactado.
     composer run phinx:seed
     ```
 
-**A API estará disponível em http://localhost:8080 e o front-end em http://localhost:5100 ⚡️**
+**A API estará disponível em http://localhost:8080 e o front-end em https://localhost:5100 ⚡️**
+
+No Windows, para usar HTTPS sem aviso de certificado, execute uma vez na raiz do projeto com PowerShell 7:
+
+```powershell
+pwsh -File ./client/scripts/setup-local-https.ps1
+docker compose up -d --force-recreate api frontend
+```
+
+O script cria certificados exclusivos desta máquina em `client/.certs/` (ignorados pelo Git) e confia na autoridade local apenas para o usuário atual do Windows. Não compartilhe a chave privada. Se necessário, reinicie o navegador depois da configuração. Sem esses arquivos, o Vite continua usando seu certificado de desenvolvimento não confiável.
 
 #### Como derrubar os containers?
 
