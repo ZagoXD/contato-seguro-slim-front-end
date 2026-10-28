@@ -108,13 +108,19 @@ Antes de implementar, documente o que você entendeu do PRD e o que pretende con
 
 Crie um arquivo em **Markdown** no repositório. O nome e o caminho são livres.
 
+- Criado como `design_plan.md` em `docs/design_plan.md`
+
 ### Plano de implementação (opcional)
 
 Um detalhamento passo a passo de como você vai executar o plano de design. Também em **Markdown**, com nome e caminho livres.
 
+- - Criado como `implementation_plan.md` em `docs/implementation_plan.md`
+
 ## Testes manuais e evidências
 
 Validar os cenários manualmente é obrigatório. A implementação do *PRD*, a documentação das evidências e o preenchimento do formulário de encerramento são suficientes para a entrega.
+
+- - Criado como `manual_tests` em `docs/manual_tests.md`
 
 ### Como documentar
 
