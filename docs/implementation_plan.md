@@ -98,26 +98,26 @@ Os caminhos abaixo são relativos a `client/src/`, exceto quando indicado.
 
 ### 1. Modelo de envolvimento
 
-- [ ] Criar `domain/involvement/involvement.type.ts`.
+- [x] Criar `domain/involvement/involvement.type.ts`.
 
 Definir os quatro papéis, os campos do vínculo e o tipo de listagem com `person: Person.Model | null`. Separar a resposta de listagem do retorno de criação.
 
 ### 2. Serviços da API
 
-- [ ] Criar os serviços de listagem, criação e exclusão em `domain/involvement/api/`.
+- [x] Criar os serviços de listagem, criação e exclusão em `domain/involvement/api/`.
 
 Utilizar as rotas por relato e enviar apenas `person_id` e `type` no POST. Tipar `data.involvements`, `data.is_anonymous`, `data.involvement` e o sucesso de exclusão sem `data`.
 
 ### 3. Contexto de envolvidos
 
-- [ ] Criar `domain/involvement/Involvements.context.tsx` para o relato selecionado.
+- [x] Criar `domain/involvement/Involvements.context.tsx` para o relato selecionado.
 
 Controlar lista, anonimato, carregamento e erro. Buscar os vínculos ao abrir o modal e limpar o estado ao trocar de relato. Respostas de uma seleção encerrada não deverão atualizar a nova seleção. O anonimato só será confirmado após uma consulta bem-sucedida.
 
 ### 4. Acesso pela tela de Relatos
 
-- [ ] Adicionar o controle do modal em `Records.context.tsx` e a ação Envolvidos em `RecordsActionsCell.tsx`.
-- [ ] Criar `domain/involvement/components/InvolvementsModal.tsx` e montá-lo em `pages/Records.page.tsx`.
+- [x] Adicionar o controle do modal em `Records.context.tsx` e a ação Envolvidos em `RecordsActionsCell.tsx`.
+- [x] Criar `domain/involvement/components/InvolvementsModal.tsx` e montá-lo em `pages/Records.page.tsx`.
 
 Exibir a identificação do relato, o indicador de anonimato e a tabela com nome, CPF, e-mail e papel. Tratar carregamento, lista vazia e falha com nova tentativa. Ao fechar, limpar a seleção.
 
@@ -125,8 +125,8 @@ Validação: abrir relatos diferentes e conferir que lista e anonimato correspon
 
 ### 5. Pessoas disponíveis e formulário
 
-- [ ] Reutilizar `listPeople` no contexto, com carregamento e erro próprios.
-- [ ] Criar `InvolvementFields.tsx` e `CreateInvolvementModal.tsx` em `domain/involvement/components/`.
+- [x] Reutilizar `listPeople` no contexto, com carregamento e erro próprios.
+- [x] Criar `InvolvementFields.tsx` e `CreateInvolvementModal.tsx` em `domain/involvement/components/`.
 
 Adicionar pessoa e papel como campos obrigatórios, pesquisa local por nome/CPF e bloqueio de pessoas já vinculadas. Apresentar orientação quando não houver opções e nova tentativa quando a consulta de pessoas falhar.
 
@@ -134,7 +134,7 @@ Validação: conferir os quatro papéis, a seleção de pessoas e os campos vazi
 
 ### 6. Criação do vínculo
 
-- [ ] Integrar o formulário ao serviço de criação.
+- [x] Integrar o formulário ao serviço de criação.
 
 Bloquear submissões repetidas e preservar os campos em falhas. Após sucesso, fechar o formulário e consultar novamente os vínculos e o anonimato.
 
@@ -142,7 +142,7 @@ Validação: vincular uma pessoa, recarregar e conferir a persistência. Vincula
 
 ### 7. Remoção do vínculo
 
-- [ ] Criar `domain/involvement/components/InvolvementsActionsCell.tsx` com confirmação de remoção.
+- [x] Criar `domain/involvement/components/InvolvementsActionsCell.tsx` com confirmação de remoção.
 
 Enviar o ID do vínculo, bloquear cliques repetidos e conferir o retorno antes de confirmar sucesso. Atualizar vínculos, opções disponíveis e anonimato após a remoção, sem excluir a pessoa ou o relato.
 
@@ -150,8 +150,8 @@ Validação: cancelar sem remover; confirmar e recarregar. Remover o último rel
 
 ### 8. Erros e pessoas excluídas
 
-- [ ] Tratar duplicidade (409), dados inválidos (422), registros indisponíveis (404) e falhas de conexão ou servidor.
-- [ ] Exibir Pessoa indisponível quando `person` for nulo, preservando papel e ação de remoção.
+- [x] Tratar duplicidade (409), dados inválidos (422), registros indisponíveis (404) e falhas de conexão ou servidor.
+- [x] Exibir Pessoa indisponível quando `person` for nulo, preservando papel e ação de remoção.
 
 Atualizar a consulta correspondente em caso de registro não encontrado. Distinguir falha na operação de falha na consulta seguinte. Não confirmar anonimato nem sucesso de uma operação com base em dados incompletos.
 
@@ -159,8 +159,8 @@ Validação:* conferir vínculo duplicado, pessoa indisponível, relato removido
 
 ### 9. Revisão e testes
 
-- [ ] Revisar mensagens, uso por teclado e apresentação em janela menor.
-- [ ] Conferir os fluxos existentes de Pessoas, Empresas e Relatos.
+- [x] Revisar mensagens, uso por teclado e apresentação em janela menor.
+- [x] Conferir os fluxos existentes de Pessoas, Empresas e Relatos.
 - [ ] Executar TypeScript, lint, build e testes existentes, registrando eventuais falhas anteriores ao épico.
 - [ ] Conferir persistência dos vínculos, anonimato e tratamento de falhas no fluxo completo.
-- [ ] Revisar o diff e confirmar que as alterações estão restritas ao fluxo e que nenhum arquivo em `server/` foi alterado.
+- [x] Revisar o diff e confirmar que as alterações estão restritas ao fluxo e que nenhum arquivo em `server/` foi alterado.

@@ -20,8 +20,8 @@
 
 | Feito | Teste | Resultado esperado | Resultado obtido |
 | --- | --- | --- | --- |
-| [ ] | Abrir Envolvidos em relatos diferentes. | Mostra os dados do relato escolhido, sem misturar as listas. | |
-| [ ] | Abrir um relato sem envolvidos. | Mostra lista vazia e indicação Anônimo. | |
+| [x] | Abrir Envolvidos em relatos diferentes. | Mostra os dados do relato escolhido, sem misturar as listas. | O mesmo do esperado |
+| [x] | Abrir um relato sem envolvidos. | Mostra lista vazia e indicação Anônimo. | O mesmo do esperado |
 | [ ] | Vincular pessoas com os quatro tipos e recarregar a página. | Nome, CPF, e-mail e papel corretos; vínculos salvos. | |
 | [ ] | Enviar sem selecionar pessoa ou tipo. | Informa os campos obrigatórios e não envia. | |
 | [ ] | Buscar uma pessoa pelo nome e pelo CPF. | Encontra a pessoa nas duas buscas. | |

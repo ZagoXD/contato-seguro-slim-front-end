@@ -28,6 +28,8 @@ type Value = {
     setIsCreateModalVisible: Dispatch<SetStateAction<Value['isCreateModalVisible']>>;
     isEditModalVisible: boolean;
     setIsEditModalVisible: Dispatch<SetStateAction<Value['isEditModalVisible']>>;
+    isInvolvementsModalVisible: boolean;
+    setIsInvolvementsModalVisible: Dispatch<SetStateAction<Value['isInvolvementsModalVisible']>>;
     fetchRecords: () => Promise<void>;
 };
 
@@ -43,6 +45,7 @@ export function RecordsContextProvider({ children }: Props) {
     const [recordId, setRecordId] = useState<Record.Model['id'] | null>(null);
     const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const [isInvolvementsModalVisible, setIsInvolvementsModalVisible] = useState(false);
 
     const app = App.useApp();
 
@@ -84,6 +87,8 @@ export function RecordsContextProvider({ children }: Props) {
         setIsCreateModalVisible,
         isEditModalVisible,
         setIsEditModalVisible,
+        isInvolvementsModalVisible,
+        setIsInvolvementsModalVisible,
         fetchRecords,
     };
 
