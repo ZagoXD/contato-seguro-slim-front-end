@@ -8,25 +8,25 @@ Implementar cadastro, consulta, edição e exclusão de pessoas na branch `feat/
 
 ### 1. Modelo de pessoa
 
-- [ ] Criar `client/src/domain/person/person.type.ts` com `Person.Model`, conforme o contrato da API.
+- [x] Criar `client/src/domain/person/person.type.ts` com `Person.Model`, conforme o contrato da API.
 
 Manter CPF como string e permitir valores nulos em `updated_at` e `deleted_at`.
 
 ### 2. Serviço de listagem
 
-- [ ] Criar `domain/person/api/list-people.service.ts` com `listPeople`.
+- [x] Criar `domain/person/api/list-people.service.ts` com `listPeople`.
 
 Utilizar `Request.get('/people')` e tipar a resposta com `data.people` e os erros compartilhados.
 
 ### 3. Contexto de Pessoas
 
-- [ ] Criar `domain/person/People.context.tsx` com provider, hook de acesso e `fetchPeople`.
+- [x] Criar `domain/person/People.context.tsx` com provider, hook de acesso e `fetchPeople`.
 
 Controlar lista, carregamento e erro. Buscar os dados ao montar o contexto e verificar a resposta antes de atualizar a lista.
 
 ### 4. Listagem na página
 
-- [ ] Substituir o conteúdo provisório de `pages/People.page.tsx` pela tabela integrada ao contexto.
+- [x] Substituir o conteúdo provisório de `pages/People.page.tsx` pela tabela integrada ao contexto.
 
 Exibir nome, CPF, e-mail e nascimento em `DD/MM/YYYY`. Reaproveitar a paginação e apresentar carregamento, lista vazia e erro com nova tentativa.
 
@@ -34,13 +34,13 @@ Validação: acessar pelo menu e pela URL, comparar os registros com a API e con
 
 ### 5. Campos do formulário
 
-- [ ] Criar `domain/person/components/PersonFields.tsx`.
+- [x] Criar `domain/person/components/PersonFields.tsx`.
 
 Adicionar os quatro campos obrigatórios, CPF com 11 dígitos, validação de e-mail e seletor de nascimento com Dayjs. Separar o tipo dos valores do formulário do formato enviado à API.
 
 ### 6. Modal de cadastro
 
-- [ ] Criar `domain/person/components/CreatePersonModal.tsx` e conectar o botão Cadastrar pessoa à página.
+- [x] Criar `domain/person/components/CreatePersonModal.tsx` e conectar o botão Cadastrar pessoa à página.
 
 Adicionar o controle de abertura ao contexto. Utilizar `Form.useForm` para validar os campos e limpar o formulário ao cancelar.
 
@@ -48,13 +48,13 @@ Validação: abrir, cancelar e reabrir o modal; conferir obrigatoriedade e forma
 
 ### 7. Serviço de cadastro
 
-- [ ] Criar `domain/person/api/create-person.service.ts` com `createPerson`.
+- [x] Criar `domain/person/api/create-person.service.ts` com `createPerson`.
 
 Enviar apenas `name`, `cpf`, `email` e `birth_date` pelo `Request.post('/people', body)`. Tipar o retorno com `data.person` e os erros previstos.
 
 ### 8. Envio e atualização da lista
 
-- [ ] Integrar o modal ao serviço de cadastro.
+- [x] Integrar o modal ao serviço de cadastro.
 
 Converter o nascimento para `YYYY-MM-DD`, indicar carregamento e impedir submissões repetidas. Após sucesso, confirmar o cadastro, fechar o modal e atualizar a lista, sem atraso artificial.
 
@@ -62,7 +62,7 @@ Validação: cadastrar uma pessoa e confirmar a persistência após recarregar a
 
 ### 9. Tratamento de erros
 
-- [ ] Tratar CPF duplicado (409), dados inválidos (422) e falhas de conexão ou servidor.
+- [x] Tratar CPF duplicado (409), dados inválidos (422) e falhas de conexão ou servidor.
 
 Preservar os campos em caso de falha e permitir nova tentativa. Distinguir falha no POST de falha na atualização da lista após um cadastro concluído.
 
@@ -70,8 +70,8 @@ Validação: enviar CPF existente, corrigir e reenviar; simular falha de conexã
 
 ### 10. Edição de pessoa
 
-- [ ] Criar `domain/person/api/update-person.service.ts` e `components/EditPersonModal.tsx` no mesmo domínio.
-- [ ] Adicionar a seleção e a abertura do modal ao contexto, com ação de edição em `domain/person/components/PeopleActionsCell.tsx`.
+- [x] Criar `domain/person/api/update-person.service.ts` e `components/EditPersonModal.tsx` no mesmo domínio.
+- [x] Adicionar a seleção e a abertura do modal ao contexto, com ação de edição em `domain/person/components/PeopleActionsCell.tsx`.
 
 Reutilizar `PersonFields`, converter a data recebida para Dayjs e enviar os quatro campos pelo `PUT /people/{id}`. Tratar carregamento, conflito e pessoa não encontrada. Limpar a seleção ao fechar e atualizar a lista após sucesso.
 
@@ -79,16 +79,8 @@ Validação: editar e recarregar a página; salvar mantendo o CPF atual; tentar 
 
 ### 11. Exclusão de pessoa
 
-- [ ] Criar `domain/person/api/delete-person.service.ts` e adicionar confirmação de exclusão em `PeopleActionsCell.tsx`.
+- [x] Criar `domain/person/api/delete-person.service.ts` e adicionar confirmação de exclusão em `PeopleActionsCell.tsx`.
 
 Utilizar `DELETE /people/{id}` e tipar o sucesso sem `data`. Bloquear cliques repetidos, atualizar a lista após sucesso e tratar falhas ou pessoa não encontrada. A exclusão é lógica e não libera o CPF para reutilização.
 
 Validação: cancelar sem excluir; confirmar e verificar a ausência na lista após recarregar; conferir nova tentativa após falha. Verificar também o retorno de vínculos existentes, que podem manter o envolvimento com `person: null`, e registrar essa limitação para o épico 2.
-
-### 12. Revisão e testes
-
-- [ ] Revisar textos, ícone, foco do formulário e apresentação em telas menores.
-- [ ] Conferir os fluxos de Pessoas, Empresas e Relatos.
-- [ ] Executar as verificações de TypeScript, lint e build do projeto.
-- [ ] Registrar cenários, passos, resultados esperados e obtidos em manual_tests.md.
-- [ ] Revisar o diff e confirmar que nenhum arquivo em `server/` foi alterado.
