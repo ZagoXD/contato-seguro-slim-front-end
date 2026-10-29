@@ -22,13 +22,13 @@
 | --- | --- | --- | --- |
 | [x] | Abrir Envolvidos em relatos diferentes. | Mostra os dados do relato escolhido, sem misturar as listas. | O mesmo do esperado |
 | [x] | Abrir um relato sem envolvidos. | Mostra lista vazia e indicação Anônimo. | O mesmo do esperado |
-| [ ] | Vincular pessoas com os quatro tipos e recarregar a página. | Nome, CPF, e-mail e papel corretos; vínculos salvos. | |
-| [ ] | Enviar sem selecionar pessoa ou tipo. | Informa os campos obrigatórios e não envia. | |
-| [ ] | Buscar uma pessoa pelo nome e pelo CPF. | Encontra a pessoa nas duas buscas. | |
-| [ ] | Tentar selecionar uma pessoa já vinculada. | A pessoa fica indisponível para um novo vínculo no mesmo relato. | |
-| [ ] | Vincular a mesma pessoa em outro relato. | Permite o vínculo, inclusive com outro papel. | |
-| [ ] | Conferir anonimato antes e depois de vincular um relatante. | Sem relatante, Anônimo; com relatante, Identificado. Outros papéis não mudam essa indicação. | |
-| [ ] | Cancelar o formulário e a confirmação de remoção. | Não cria nem remove vínculos. | |
-| [ ] | Remover o último relatante e recarregar a página. | Vínculo removido e relato Anônimo; pessoa e relato continuam cadastrados. | |
-| [ ] | Desativar a rede ao consultar ou vincular e tentar novamente. | Mostra erro, preserva os campos do formulário e permite nova tentativa. | |
-| [ ] | Excluir uma pessoa vinculada e consultar os envolvidos. | Mostra Pessoa indisponível, mantém o papel e permite remover o vínculo. | |
+| [x] | Vincular pessoas com os quatro tipos e recarregar a página. | Nome, CPF, e-mail e papel corretos; vínculos salvos. | O mesmo do esperado |
+| [x] | Enviar sem selecionar pessoa ou tipo. | Informa os campos obrigatórios e não envia. | O mesmo do esperado |
+| [x] | Buscar uma pessoa pelo nome e pelo CPF. | Encontra a pessoa nas duas buscas. | O mesmo do esperado |
+| [x] | Tentar selecionar uma pessoa já vinculada. | A pessoa fica indisponível para um novo vínculo no mesmo relato. | O mesmo do esperado |
+| [x] | Vincular a mesma pessoa em outro relato. | Permite o vínculo, inclusive com outro papel. | O mesmo do esperado |
+| [x] | Conferir anonimato antes e depois de vincular um relatante. | Sem relatante, Anônimo; com relatante, Identificado. Outros papéis não mudam essa indicação. | O mesmo do esperado |
+| [x] | Cancelar o formulário e a confirmação de remoção. | Não cria nem remove vínculos. | O mesmo do esperado |
+| [x] | Remover o último relatante e recarregar a página. | Vínculo removido e relato Anônimo; pessoa e relato continuam cadastrados. | |
+| [x] | Desativar a rede ao consultar ou vincular e tentar novamente. | Mostra erro, preserva os campos do formulário e permite nova tentativa. | O mesmo do esperado |
+| [x] | Excluir uma pessoa vinculada e consultar os envolvidos. | Mostra Pessoa indisponível, mantém o papel e permite remover o vínculo. | O mesmo do esperado |

@@ -183,3 +183,7 @@ O repositório possui dois diretórios principais, sendo `server` para a **API R
 - Dayjs 1
 - React Router 7
 - Vite
+
+## Bug encontrado na API
+
+Ao remover um envolvimento e tentar vincular a mesma pessoa ao mesmo relato novamente, a API retorna erro de chave duplicada (`SQLSTATE[23000]`). A exclusão é lógica, mas o índice único do banco continua considerando o vínculo removido. A correção depende do back-end, que foi mantido sem alterações conforme as regras da etapa.
