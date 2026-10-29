@@ -15,3 +15,20 @@
 | [x] | Editar usando CPF de outra pessoa ou dados inválidos. | Informa o problema e não salva. | O mesmo do esperado |
 | [x] | Excluir e recarregar a página. | A pessoa não aparece mais na lista. | O mesmo do esperado |
 | [x] | Simular falha na exclusão e tentar novamente. | Mostra erro, mantém a linha e permite tentar novamente. | Testado desativando rede no f12. O mesmo do esperado |
+
+# Testes manuais — Envolvimentos
+
+| Feito | Teste | Resultado esperado | Resultado obtido |
+| --- | --- | --- | --- |
+| [x] | Abrir Envolvidos em relatos diferentes. | Mostra os dados do relato escolhido, sem misturar as listas. | O mesmo do esperado |
+| [x] | Abrir um relato sem envolvidos. | Mostra lista vazia e indicação Anônimo. | O mesmo do esperado |
+| [x] | Vincular pessoas com os quatro tipos e recarregar a página. | Nome, CPF, e-mail e papel corretos; vínculos salvos. | O mesmo do esperado |
+| [x] | Enviar sem selecionar pessoa ou tipo. | Informa os campos obrigatórios e não envia. | O mesmo do esperado |
+| [x] | Buscar uma pessoa pelo nome e pelo CPF. | Encontra a pessoa nas duas buscas. | O mesmo do esperado |
+| [x] | Tentar selecionar uma pessoa já vinculada. | A pessoa fica indisponível para um novo vínculo no mesmo relato. | O mesmo do esperado |
+| [x] | Vincular a mesma pessoa em outro relato. | Permite o vínculo, inclusive com outro papel. | O mesmo do esperado |
+| [x] | Conferir anonimato antes e depois de vincular um relatante. | Sem relatante, Anônimo; com relatante, Identificado. Outros papéis não mudam essa indicação. | O mesmo do esperado |
+| [x] | Cancelar o formulário e a confirmação de remoção. | Não cria nem remove vínculos. | O mesmo do esperado |
+| [x] | Remover o último relatante e recarregar a página. | Vínculo removido e relato Anônimo; pessoa e relato continuam cadastrados. | |
+| [x] | Desativar a rede ao consultar ou vincular e tentar novamente. | Mostra erro, preserva os campos do formulário e permite nova tentativa. | O mesmo do esperado |
+| [x] | Excluir uma pessoa vinculada e consultar os envolvidos. | Mostra Pessoa indisponível, mantém o papel e permite remover o vínculo. | O mesmo do esperado |
