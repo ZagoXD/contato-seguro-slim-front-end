@@ -142,3 +142,107 @@ Os componentes compartilhados serão reaproveitados; qualquer alteração neles 
 Falhas no cadastro != Falhas na listagem. Devem possuir mensagems/fluxos diferentes: se o POST tiver sucesso e a busca falhar, tratar como se a pessoa ja estiver sido criada.
 
 Os dados do formulário não devem aparecer em logs desnecessários. As chamadas de hooks devem seguir as regras do React, sem depender de condições.
+
+
+# Plano de design — Envolvimento
+
+## Resumo
+
+Permite vincular pessoas a relatos e consultar o papel de cada envolvido.
+
+## Objetivo da entrega
+
+- Consultar os envolvidos de um relato.
+- Vincular uma pessoa como relatante, testemunha, vítima ou denunciado.
+- Impedir vínculos duplicados da mesma pessoa no mesmo relato.
+- Mostrar claramente se o relato é anônimo ou identificado.
+- Permitir remover um vínculo, utilizando o endpoint existente.
+
+## Acesso aos envolvidos
+
+A tabela de Relatos terá uma ação Envolvidos em cada linha. A ação abrirá um modal com a identificação do relato, a indicação de anonimato, a tabela de envolvidos e o botão Vincular pessoa.
+
+A tabela mostrará nome, CPF, e-mail e tipo de envolvimento. A remoção terá confirmação e excluirá somente o vínculo, sem excluir a pessoa ou o relato.
+
+Carregamento, lista vazia e falha de consulta terão estados distintos. Em caso de falha, será possível tentar novamente. Ao abrir outro relato, os dados da seleção anterior não deverão permanecer na tela.
+
+## Tipos de envolvimento
+
+1. Relatante (`whistleblower`).
+2. Testemunha (`witness`).
+3. Vítima (`victim`).
+4. Denunciado (`denounced`).
+
+
+## Vincular pessoa
+
+O botão Vincular pessoa abrirá um formulário com pessoa e tipo de envolvimento, ambos obrigatórios.
+
+O seletor utilizará as pessoas retornadas por `GET /people`, com pesquisa por nome ou CPF. Pessoas já vinculadas ao relato ficarão indisponíveis para seleção. A validação do servidor continuará sendo necessária para tratar alterações feitas em outra sessão.
+
+Se não houver pessoas disponíveis, será exibida uma orientação para cadastrar na tela de Pessoas. Uma falha nessa consulta deverá permitir nova tentativa sem impedir a visualização dos envolvidos já carregados.
+
+Durante o envio, novas submissões serão bloqueadas. Em falha, os campos serão preservados. Após sucesso, o formulário será fechado e a lista de envolvidos e o anonimato serão consultados novamente.
+
+## Anonimato
+
+A indicação Anônimo ou Identificado ficará no modal, junto à identificação do relato, usando `data.is_anonymous` retornado pela API.
+
+Não haverá campo de anonimato no formulário do relato. Um relato sem relatante é anônimo, mesmo que possua testemunhas, vítimas ou denunciados. A remoção do último relatante deve atualizar essa indicação após uma nova consulta.
+
+Enquanto a consulta estiver pendente ou com erro, o anonimato não deverá ser apresentado como confirmado. O indicador não será calculado a partir da quantidade de envolvidos nem da disponibilidade dos dados de uma pessoa.
+
+A listagem geral de Relatos será preservada; a consulta de envolvimentos acontecerá ao abrir o modal, sem uma requisição adicional para cada linha da tabela.
+
+## Integração com a API
+
+Os contratos estão descritos em API.md.
+
+| Operação | Endpoint | Resposta de sucesso |
+| --- | --- | --- |
+| Consultar envolvidos | `GET /records/{record_id}/involvements` | `data.involvements` e `data.is_anonymous`, com `statusCode: 200`. |
+| Vincular pessoa | `POST /records/{record_id}/involvements` | `data.involvement`, com `statusCode: 201`. |
+| Remover vínculo | `DELETE /records/{record_id}/involvements/{id}` | `statusCode: 200`, sem `data`. |
+| Consultar pessoas | `GET /people` | `data.people`, com `statusCode: 200`. |
+
+O POST receberá apenas `person_id` e `type`. O relato será identificado pela URL. No DELETE, `id` é o ID do envolvimento, não o da pessoa.
+
+O modelo do vínculo terá `id`, `record_id`, `person_id`, `type`, `created_at`, `updated_at` e `deleted_at`. Os dois últimos podem ser nulos. Na listagem, haverá também `person`, do tipo `Person.Model | null`. O retorno do cadastro não inclui necessariamente essa relação, por isso a lista será buscada novamente após o envio.
+
+Os serviços seguirão o padrão existente de `Request`, tipos de resposta e tratamento de erros. A exclusão deverá aceitar o sucesso sem `data` e verificar o `statusCode` antes de confirmar a remoção.
+
+### Tratamento de erros
+
+- Vínculo duplicado (409): informar que a pessoa já está vinculada e atualizar as opções disponíveis.
+- Dados inválidos (422): informar o problema e manter o formulário aberto.
+- Pessoa, relato ou vínculo não encontrado (404): atualizar a consulta correspondente. Se o relato não existir mais, fechar o modal, limpar a seleção e atualizar Relatos.
+- Falha de conexão ou servidor: informar a falha e permitir nova tentativa.
+
+Se o envio ou a remoção tiver sucesso e a consulta seguinte falhar, a mensagem deverá identificar a falha na atualização da lista, sem repetir a operação automaticamente.
+
+## Limitações da API
+
+A remoção do envolvimento é lógica. O índice único de `record_id` e `person_id` continua reservado após a exclusão. Uma tentativa de vincular novamente a mesma pessoa ao mesmo relato pode gerar erro de banco em vez de conflito 409. Remover e recriar não será oferecido como forma de alterar o papel.
+
+Se uma pessoa for excluída, o envolvimento poderá continuar na resposta com `person: null`. Nesse caso, a tabela mostrará Pessoa indisponível, mantendo o papel e a ação de remover o vínculo. Se o vínculo for de relatante, o relato continuará identificado conforme o valor calculado pelo servidor.
+
+Esses comportamentos serão tratados na interface, sem alterações no back-end.
+
+## Arquivos envolvidos
+
+A estrutura de envolvimentos ficará em `client/src/domain/involvement/`. A organização e a formatação seguirão os domínios existentes.
+
+| Arquivo | O que será feito |
+| --- | --- |
+| `involvement.type.ts` | Definir os tipos do vínculo, dos papéis e da listagem com pessoa. |
+| `api/list-involvements.service.ts` | Consultar envolvidos e anonimato por relato. |
+| `api/create-involvement.service.ts` | Enviar pessoa e papel. |
+| `api/delete-involvement.service.ts` | Remover o vínculo pelo seu ID. |
+| `Involvements.context.tsx` | Controlar consulta, pessoas disponíveis, carregamento, erros e formulário do relato selecionado. |
+| `components/InvolvementsModal.tsx` | Apresentar anonimato, listagem e acesso ao formulário. |
+| `components/InvolvementFields.tsx` | Apresentar os seletores de pessoa e papel. |
+| `components/CreateInvolvementModal.tsx` | Controlar validação, envio e retorno do formulário. |
+| `components/InvolvementsActionsCell.tsx` | Confirmar e executar a remoção do vínculo. |
+| `client/src/domain/record/Records.context.tsx` | Adicionar o controle de abertura do modal de envolvidos, reutilizando a seleção de relato. |
+| `client/src/domain/record/components/RecordsActionsCell.tsx` | Adicionar a ação Envolvidos. |
+| `client/src/pages/Records.page.tsx` | Montar o modal para o relato selecionado. |

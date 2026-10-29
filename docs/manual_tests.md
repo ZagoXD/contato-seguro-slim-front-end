@@ -15,3 +15,20 @@
 | [x] | Editar usando CPF de outra pessoa ou dados inválidos. | Informa o problema e não salva. | O mesmo do esperado |
 | [x] | Excluir e recarregar a página. | A pessoa não aparece mais na lista. | O mesmo do esperado |
 | [x] | Simular falha na exclusão e tentar novamente. | Mostra erro, mantém a linha e permite tentar novamente. | Testado desativando rede no f12. O mesmo do esperado |
+
+# Testes manuais — Envolvimentos
+
+| Feito | Teste | Resultado esperado | Resultado obtido |
+| --- | --- | --- | --- |
+| [ ] | Abrir Envolvidos em relatos diferentes. | Mostra os dados do relato escolhido, sem misturar as listas. | |
+| [ ] | Abrir um relato sem envolvidos. | Mostra lista vazia e indicação Anônimo. | |
+| [ ] | Vincular pessoas com os quatro tipos e recarregar a página. | Nome, CPF, e-mail e papel corretos; vínculos salvos. | |
+| [ ] | Enviar sem selecionar pessoa ou tipo. | Informa os campos obrigatórios e não envia. | |
+| [ ] | Buscar uma pessoa pelo nome e pelo CPF. | Encontra a pessoa nas duas buscas. | |
+| [ ] | Tentar selecionar uma pessoa já vinculada. | A pessoa fica indisponível para um novo vínculo no mesmo relato. | |
+| [ ] | Vincular a mesma pessoa em outro relato. | Permite o vínculo, inclusive com outro papel. | |
+| [ ] | Conferir anonimato antes e depois de vincular um relatante. | Sem relatante, Anônimo; com relatante, Identificado. Outros papéis não mudam essa indicação. | |
+| [ ] | Cancelar o formulário e a confirmação de remoção. | Não cria nem remove vínculos. | |
+| [ ] | Remover o último relatante e recarregar a página. | Vínculo removido e relato Anônimo; pessoa e relato continuam cadastrados. | |
+| [ ] | Desativar a rede ao consultar ou vincular e tentar novamente. | Mostra erro, preserva os campos do formulário e permite nova tentativa. | |
+| [ ] | Excluir uma pessoa vinculada e consultar os envolvidos. | Mostra Pessoa indisponível, mantém o papel e permite remover o vínculo. | |
